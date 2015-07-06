@@ -1,0 +1,5 @@
+c:\users\alexandr\documents\visual studio 2013\Projects\WindowsFormsApplication1\Palettes\obj\Debug\Palettes.csprojResolveAssemblyReference.cache
+c:\users\alexandr\documents\visual studio 2013\Projects\WindowsFormsApplication1\Palettes\bin\Debug\Palettes.dll
+c:\users\alexandr\documents\visual studio 2013\Projects\WindowsFormsApplication1\Palettes\bin\Debug\Palettes.pdb
+c:\users\alexandr\documents\visual studio 2013\Projects\WindowsFormsApplication1\Palettes\obj\Debug\Palettes.dll
+c:\users\alexandr\documents\visual studio 2013\Projects\WindowsFormsApplication1\Palettes\obj\Debug\Palettes.pdb
