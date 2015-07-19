@@ -20,6 +20,7 @@ namespace WindowsFormsApplication1
     {
         public AnimPalMap APM;
         public AnimPalette AP;
+        public AnimPalette Orig;
 
         public int cPM; //current
         public int cP; //current
@@ -150,6 +151,22 @@ namespace WindowsFormsApplication1
                 {
                     break;
                 }
+        }
+
+        private void trackBar1_ValueChanged(object sender, EventArgs e)
+        {
+            foreach (Palette P in AP.Palettes)
+            {
+                for (int i = 0; i < P.Colours.Count; i++)
+                {
+                    HSLColour Temp = new HSLColour(P.Colours[i]);
+                    if (Temp.S > 0.5) // Saturate parts, such as armour
+                    {
+                        Temp.H = (ushort)trackBar1.Value;
+                        P.Colours[i] = new Colour(Temp);
+                    }
+                }
+            }
         }
     }
 }

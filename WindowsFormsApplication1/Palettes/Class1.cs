@@ -35,6 +35,71 @@ namespace Palettes
         {
 
         }
+        public Colour(HSLColour Clr)
+        {
+            ushort H = Clr.H;
+            double S = Clr.S;
+            double L = Clr.L;
+
+            double C = (1 - Math.Abs(2 * L - 1)) * S;
+            double X = C * (1 - Math.Abs(((double)H / (double)60) % 2 - 1));
+            double m = L - C / 2;
+
+            double r = 0;
+            double g = 0;
+            double b = 0;
+
+            switch (H / 60)
+            {
+                case 0:
+                    {
+                        r = C;
+                        g = X;
+                        b = 0;
+                        break;
+                    }
+                case 1:
+                    {
+                        r = X;
+                        g = C;
+                        b = 0;
+                        break;
+                    }
+                case 2:
+                    {
+                        r = 0;
+                        g = C;
+                        b = X;
+                        break;
+                    }
+                case 3:
+                    {
+                        r = 0;
+                        g = X;
+                        b = C;
+                        break;
+                    }
+                case 4:
+                    {
+                        r = X;
+                        g = 0;
+                        b = C;
+                        break;
+                    }
+                case 5:
+                    {
+                        r = C;
+                        g = 0;
+                        b = X;
+                        break;
+                    }
+            }
+
+            R = (byte)((r + m) * 255);
+            G = (byte)((g + m) * 255);
+            B = (byte)((b + m) * 255);
+            A = Clr.A;
+        }
 
         public long DecCode
         {
@@ -52,6 +117,30 @@ namespace Palettes
             {
                 return 16777216 * R + 65536 * G + 256 * B + A;
             }
+        }
+    }
+
+    public class HSLColour
+    {
+        public ushort H = 0;
+        public double S = 0;
+        public double L = 0;
+        public byte A = 0;
+
+        public HSLColour(Colour Clr)
+        {
+            double R = (double)Clr.R / (double)255;
+            double G = (double)Clr.G / (double)255;
+            double B = (double)Clr.B / (double)255;
+
+            double Cmax = Math.Max(R, Math.Max(G, B));
+            double Cmin = Math.Min(R, Math.Min(G, B));
+            double delta = Cmax - Cmin;
+
+            H = (ushort)(delta == 0 ? 0 : Cmax == R ? 60 * (((G - B) / delta) % 6) : Cmax == G ? 60 * ((B - R) / delta + 2) : 60 * ((R - G) / delta + 4));
+            L = (double)((Cmax + Cmin) / 2);
+            S = (double)(delta == 0 ? 0 : delta / (1 - Math.Abs(2 * L - 1)));
+            A = Clr.A;
         }
     }
 
